@@ -17,3 +17,7 @@ fn gen_float() -> float {
 fn gen_byte() -> uint {
 	ret (std::rand::mk_rng().next() as int % 256) as uint;
 }
+
+fn gen_char() -> char {
+	ret (std::rand::mk_rng().next() as int % 128) as char;
+}

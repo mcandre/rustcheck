@@ -8,7 +8,8 @@ http://www.yellosoft.us/quickcheck
 
 	$ make
 	$ ./example
-	Random bool: false
-	Random int: 105804441
-	Random float: 0.652987
-	Random byte: 5
+	Random bool: true
+	Random int: 2563812891
+	Random float: 0.524745
+	Random byte: 150
+	Random char: Q
