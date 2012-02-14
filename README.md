@@ -9,3 +9,4 @@ http://www.yellosoft.us/quickcheck
 	$ make
 	$ ./example
 	Random bool: true
+	Random int: 4275058612

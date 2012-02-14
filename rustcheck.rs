@@ -5,3 +5,7 @@ use std;
 fn gen_bool() -> bool {
 	ret (std::rand::mk_rng().next_float() * 1.0f) > 0.5f;
 }
+
+fn gen_int() -> int {
+	ret std::rand::mk_rng().next() as int;
+}
