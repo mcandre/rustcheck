@@ -22,15 +22,19 @@ fn gen_char() -> char {
 	ret (std::rand::mk_rng().next() as int % 128) as char;
 }
 
-fn gen_vec<T>(f : fn() -> T, len : uint) -> [T] {
+fn gen_vec<T>(gen : fn() -> T, len : uint) -> [T] {
 	if len < 1u {
 		ret [];
 	}
 	else {
-		ret [f()] + gen_vec(f, len - 1u);
+		ret [gen()] + gen_vec(gen, len - 1u);
 	}
 }
 
 fn gen_str() -> str {
 	ret str::from_chars(gen_vec(gen_char, (gen_int() % 100) as uint));
+}
+
+fn for_all(property : fn() -> bool, gens : [fn() -> ]) {
+	// ...
 }

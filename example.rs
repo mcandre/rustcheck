@@ -1,11 +1,24 @@
 use rustcheck;
+import rustcheck::*;
+
 use std;
 
+fn prop_even(x : int) -> bool {
+	ret x % 2 == 0;
+}
+
+fn gen_even() -> int {
+	let i : int = rustcheck::gen_int();
+
+	if i % 2 == 0 {
+		ret i;
+	}
+	else {
+		ret i + 1;
+	}
+}
+
 fn main() {
-	std::io::println(#fmt("Random bool: %b", rustcheck::gen_bool()));
-	std::io::println(#fmt("Random int: %d", rustcheck::gen_int()));
-	std::io::println(#fmt("Random float: %f", rustcheck::gen_float()));
-	std::io::println(#fmt("Random byte: %u", rustcheck::gen_byte()));
-	std::io::println(#fmt("Random char: %c", rustcheck::gen_char()));
-	std::io::println(#fmt("Random str: %s", rustcheck::gen_str()));
+	for_all(prop_even, [gen_int]);
+	for_all(prop_even, [gen_even]);
 }
