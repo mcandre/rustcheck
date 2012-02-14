@@ -9,5 +9,6 @@ http://www.yellosoft.us/quickcheck
 	$ make
 	$ ./example
 	Random bool: false
-	Random int: 684013420
-	Random float: 0.268652
+	Random int: 105804441
+	Random float: 0.652987
+	Random byte: 5

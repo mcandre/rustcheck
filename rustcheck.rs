@@ -13,3 +13,7 @@ fn gen_int() -> int {
 fn gen_float() -> float {
 	ret std::rand::mk_rng().next_float();
 }
+
+fn gen_byte() -> uint {
+	ret (std::rand::mk_rng().next() as int % 256) as uint;
+}
