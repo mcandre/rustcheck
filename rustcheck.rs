@@ -9,3 +9,7 @@ fn gen_bool() -> bool {
 fn gen_int() -> int {
 	ret std::rand::mk_rng().next() as int;
 }
+
+fn gen_float() -> float {
+	ret std::rand::mk_rng().next_float();
+}
