@@ -7,4 +7,5 @@ fn main() {
 	std::io::println(#fmt("Random float: %f", rustcheck::gen_float()));
 	std::io::println(#fmt("Random byte: %u", rustcheck::gen_byte()));
 	std::io::println(#fmt("Random char: %c", rustcheck::gen_char()));
+	std::io::println(#fmt("Random str: %s", rustcheck::gen_str()));
 }

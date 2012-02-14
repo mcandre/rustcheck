@@ -21,3 +21,16 @@ fn gen_byte() -> uint {
 fn gen_char() -> char {
 	ret (std::rand::mk_rng().next() as int % 128) as char;
 }
+
+fn gen_vec<T>(f : fn() -> T, len : uint) -> [T] {
+	if len < 1u {
+		ret [];
+	}
+	else {
+		ret [f()] + gen_vec(f, len - 1u);
+	}
+}
+
+fn gen_str() -> str {
+	ret str::from_chars(gen_vec(gen_char, (gen_int() % 100) as uint));
+}
