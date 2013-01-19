@@ -32,9 +32,12 @@ fn gen_vec<T>(gen : fn() -> T, len : uint) -> [T] {
 }
 
 fn gen_str() -> str {
-	ret str::from_chars(gen_vec(gen_char, (gen_int() % 100) as uint));
+	let len : uint = (gen_int() % 100) as uint;
+	ret str::from_chars(gen_vec(gen_char, len));
 }
 
-fn for_all(property : fn() -> bool, gens : [fn() -> ]) {
+fn for_all<T>(property : fn(T) -> bool, gens : [fn()]) {
+	let test_case : T = vec::map(gens, { |g| ret g(); });
+
 	// ...
 }
