@@ -16,3 +16,7 @@ http://www.yellosoft.us/quickcheck
 	Random str: 5E7
 	>XpOa^
 	pr`zA5pee<0P6d]>LD",
+
+## LICENSE
+
+FreeBSD
