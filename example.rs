@@ -1,20 +1,23 @@
-use rustcheck;
-import rustcheck::*;
 
-use std;
+extern mod rustcheck;
+
+use rustcheck::*;
+use std::*;
+
+
 
 fn prop_even(x : int) -> bool {
-	ret x % 2 == 0;
+	return x % 2 == 0;
 }
 
 fn gen_even() -> int {
 	let i : int = rustcheck::gen_int();
 
 	if i % 2 == 0 {
-		ret i;
+	    i
 	}
 	else {
-		ret i + 1;
+	    i + 1
 	}
 }
 
