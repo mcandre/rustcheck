@@ -1,2 +1,3 @@
 *.dSYM
 *.dylib
+Gemfile.lock
