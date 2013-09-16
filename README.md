@@ -23,7 +23,7 @@ FreeBSD
 
 # REQUIREMENTS
 
-* [rust](http://www.rust-lang.org/) 0.7+
+* [rust](http://www.rust-lang.org/) 0.8+
 
 ## Optional
 
