@@ -2,32 +2,31 @@
 
 extern mod std;
 
-use std::rand::*;
-use std::str::*;
-//use std::vec::*;
+use std::rand::random;
+use std::str::from_chars;
 
 
-fn gen_bool() -> bool {
-	return (std::rand::random::<float>()) > 0.5f;
+pub fn gen_bool() -> bool {
+	return (std::rand::random::<f32>()) > 0.5f32;
 }
 
-fn gen_int() -> int {
+pub fn gen_int() -> int {
 	return std::rand::random::<int>();
 }
 
-fn gen_float() -> float {
-	return std::rand::random::<float>();
+pub fn gen_float() -> f32 {
+	return std::rand::random::<f32>();
 }
 
-fn gen_byte() -> uint {
+pub fn gen_byte() -> uint {
 	return (std::rand::random::<uint>() % 256);
 }
 
-fn gen_char() -> char {
+pub fn gen_char() -> char {
 	return (std::rand::random::<u8>() % 128) as char;
 }
 
-fn gen_vec<T: Clone>(gen : &fn() -> T, len : uint) -> ~[T] {
+pub fn gen_vec<T: Clone>(gen : (|| -> T), len : uint) -> ~[T] {
 	if len < 1u {
 		return ~[];
 	}
@@ -36,13 +35,19 @@ fn gen_vec<T: Clone>(gen : &fn() -> T, len : uint) -> ~[T] {
 	}
 }
 
-fn gen_str() -> ~str {
+pub fn gen_str() -> ~str {
 	let len : uint = (gen_int() % 100) as uint;
 	return std::str::from_chars(gen_vec(gen_char, len));
 }
 
 
-fn for_all<T>(property : &fn(T) -> bool, gens : &[&fn()]) {
-//    let test_case : T = gens.iter().map();
-    // ...let test_case : T = vec::map(gens, { |g| ret g(); });
+pub fn for_all<T>(property : |T| -> bool, gens : &[|| -> T]) -> bool {
+    let mut result = true;
+
+    for g in gens.iter() {
+        let v: T = (*g)();
+        result = result & property(v);
+    }
+
+    return result;
 }

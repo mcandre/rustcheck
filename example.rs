@@ -1,8 +1,7 @@
 
 extern mod rustcheck;
 
-use rustcheck::*;
-use std::*;
+use rustcheck::{gen_int,for_all};
 
 
 
@@ -22,6 +21,9 @@ fn gen_even() -> int {
 }
 
 fn main() {
-	for_all(prop_even, [gen_int]);
-	for_all(prop_even, [gen_even]);
+    let a = || rustcheck::gen_int();
+    let b = || gen_even();
+
+	assert!(rustcheck::for_all(prop_even, &[a]));
+	assert!(rustcheck::for_all(prop_even, &[b]));
 }
