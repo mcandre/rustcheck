@@ -29,10 +29,20 @@ FreeBSD
 
 * [Ruby](https://www.ruby-lang.org/) 1.9+
 * [Guard](http://guardgem.org/) 1.8.2+
+* [aspelllint](https://github.com/mcandre/aspelllint)
 
-Use `bundle` to install Guard.
+Install Guard and aspelllint:
+
+    $ bundle
 
 # DEVELOPMENT
+
+## Spell Check
+
+    $ aspelllint
+    ...
+
+## Local CI
 
 Start Guard in a shell, and it will automatically run unit tests when the source code changes:
 
