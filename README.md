@@ -12,7 +12,7 @@ mkdir -p bin/
 rustc --crate-type=lib rustcheck.rs
 rustc -o bin/example example.rs -L .
 bin/example
-task '<main>' failed at 'assertion failed: rustcheck::for_all(prop_even, x)', example.rs:30
+task '<main>' failed at 'assertion failed: for_all(prop_even, x)', example.rs:36
 make: [test] Error 101 (ignored)
 ```
 

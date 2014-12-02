@@ -1,13 +1,19 @@
+//! Example rustcheck usage
+
 extern crate rustcheck;
 
 use rustcheck::{gen_int,for_all};
 
+// Property: All integers are even
 fn prop_even(x : int) -> bool {
+  // Modulo check for evenness
 	return x % 2 == 0;
 }
 
+// Generate a random even integer
 fn gen_even() -> int {
-	let i : int = rustcheck::gen_int();
+  // Based on rustcheck's integer generator
+	let i : int = gen_int();
 
 	if i % 2 == 0 {
     i
@@ -18,7 +24,7 @@ fn gen_even() -> int {
 }
 
 fn main() {
-  let a = || rustcheck::gen_int();
+  let a = || gen_int();
   let b = || gen_even();
 
   let mut x = Vec::new();
@@ -27,6 +33,6 @@ fn main() {
   let mut y = Vec::new();
   y.push(b);
 
-	assert!(rustcheck::for_all(prop_even, x));
-	assert!(rustcheck::for_all(prop_even, y));
+	assert!(for_all(prop_even, x));
+	assert!(for_all(prop_even, y));
 }
