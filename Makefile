@@ -1,7 +1,7 @@
 all: example
 
 example: example.rs rustcheck.rs
-	rustc --lib rustcheck.rs
+	rustc --crate-type=lib rustcheck.rs
 	rustc example.rs -L .
 
 lili:

@@ -1,6 +1,6 @@
-#[link(name = "rustcheck", vers = "0.0.1")];
+#![crate_id(name = "rustcheck", vers = "0.0.1")]
 
-extern mod std;
+extern crate std;
 
 use std::rand::random;
 use std::str::from_chars;
@@ -26,27 +26,46 @@ pub fn gen_char() -> char {
 	return (std::rand::random::<u8>() % 128) as char;
 }
 
-pub fn gen_vec<T: Clone>(gen : (|| -> T), len : uint) -> ~[T] {
+pub fn gen_vec<T: Clone>(gen : (|| -> T), len : uint) -> Vec<T> {
 	if len < 1u {
-		return ~[];
+		return Vec::new();
 	}
 	else {
-		return ~[gen()] + gen_vec(gen, len - 1u);
+    let mut v : Vec<T> = Vec::new();
+    v.push(gen());
+
+    let w : Vec<T> = gen_vec(gen, len - 1u);
+
+    return v + w;
 	}
 }
 
-pub fn gen_str() -> ~str {
+pub fn gen_str() -> String {
 	let len : uint = (gen_int() % 100) as uint;
-	return std::str::from_chars(gen_vec(gen_char, len));
-}
 
+  let chars : Vec<char> = gen_vec(gen_char, len);
+
+  let u8vec : Vec<u8> = Vec::from_fn(chars.len(), |index| *(chars.get(index)) as u8);
+
+  let u8s : &[u8] = u8vec.as_slice();
+
+  let option_str : Option<&str> = std::str::from_utf8(u8s);
+
+  let s : &str = option_str.unwrap();
+
+  let string : String = s.to_string();
+
+  return string;
+}
 
 pub fn for_all<T>(property : |T| -> bool, gens : &[|| -> T]) -> bool {
     let mut result = true;
 
     for g in gens.iter() {
-        let v: T = (*g)();
-        result = result & property(v);
+      let h : || -> T = *g;
+
+      let v : T = h();
+      result = result & property(v);
     }
 
     return result;
