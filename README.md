@@ -6,16 +6,15 @@ http://www.yellosoft.us/quickcheck
 
 # EXAMPLE
 
-    $ make
-    $ ./example
-    Random bool: true
-    Random int: 1864093597
-    Random float: 0.057614
-    Random byte: 33
-    Random char: e
-    Random str: 5E7
-    >XpOa^
-    pr`zA5pee<0P6d]>LD",
+```
+$ make
+mkdir -p bin/
+rustc --crate-type=lib rustcheck.rs
+rustc -o bin/example example.rs -L .
+bin/example
+task '<main>' failed at 'assertion failed: rustcheck::for_all(prop_even, x)', example.rs:30
+make: [test] Error 101 (ignored)
+```
 
 # LICENSE
 
@@ -23,7 +22,7 @@ FreeBSD
 
 # REQUIREMENTS
 
-* [rust](http://www.rust-lang.org/) 0.8+
+* [rust](http://www.rust-lang.org/) 0.11
 
 ## Optional
 

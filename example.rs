@@ -1,4 +1,4 @@
-extern mod rustcheck;
+extern crate rustcheck;
 
 use rustcheck::{gen_int,for_all};
 
@@ -21,6 +21,12 @@ fn main() {
   let a = || rustcheck::gen_int();
   let b = || gen_even();
 
-	assert!(rustcheck::for_all(prop_even, &[a]));
-	assert!(rustcheck::for_all(prop_even, &[b]));
+  let mut x = Vec::new();
+  x.push(a);
+
+  let mut y = Vec::new();
+  y.push(b);
+
+	assert!(rustcheck::for_all(prop_even, x));
+	assert!(rustcheck::for_all(prop_even, y));
 }

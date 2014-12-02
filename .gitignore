@@ -1,3 +1,5 @@
+bin/
 *.dSYM
 *.dylib
+*.rlib
 Gemfile.lock

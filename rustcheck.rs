@@ -3,8 +3,6 @@
 extern crate std;
 
 use std::rand::random;
-use std::str::from_chars;
-
 
 pub fn gen_bool() -> bool {
 	return (std::rand::random::<f32>()) > 0.5f32;
@@ -19,7 +17,7 @@ pub fn gen_float() -> f32 {
 }
 
 pub fn gen_byte() -> uint {
-	return (std::rand::random::<uint>() % 256);
+	return std::rand::random::<uint>() % 256;
 }
 
 pub fn gen_char() -> char {
@@ -58,13 +56,11 @@ pub fn gen_str() -> String {
   return string;
 }
 
-pub fn for_all<T>(property : |T| -> bool, gens : &[|| -> T]) -> bool {
+pub fn for_all<T>(property : |T| -> bool, mut gens : Vec<|| -> T>) -> bool {
     let mut result = true;
 
-    for g in gens.iter() {
-      let h : || -> T = *g;
-
-      let v : T = h();
+    for g in gens.mut_iter() {
+      let v : T = (*g)();
       result = result & property(v);
     }
 

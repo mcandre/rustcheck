@@ -1,8 +1,14 @@
-all: example
+BIN=bin/example
 
-example: example.rs rustcheck.rs
+all: test
+
+test: $(BIN)
+	-$(BIN)
+
+$(BIN): example.rs rustcheck.rs
+	mkdir -p bin/
 	rustc --crate-type=lib rustcheck.rs
-	rustc example.rs -L .
+	rustc -o $(BIN) example.rs -L .
 
 lili:
 	bundle exec lili .
@@ -10,6 +16,7 @@ lili:
 lint: lili
 
 clean:
-	-rm example
+	-rm -rf bin/
+	-rm -rf *.rlib
 	-rm -rf *.dylib
 	-rm -rf *.dSYM
