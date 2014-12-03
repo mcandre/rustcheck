@@ -2,7 +2,7 @@
 
 #![crate_id(name = "rustcheck", vers = "0.0.1")]
 
-extern crate std;
+#![feature(macro_rules)]
 
 use std::rand::random;
 
@@ -78,19 +78,35 @@ pub fn gen_string() -> String {
 // Give a property and a collection of generators,
 // test the property over random test cases
 // created by calling the generator functions
-pub fn for_all<T>(property : |T| -> bool, mut gens : Vec<|| -> T>) -> bool {
+pub fn for_all<T : Clone + ToString>(property : |T| -> bool, mut gens : Vec<|| -> T>) -> Result<bool, T> {
   //! Assume property is true
 
-  let mut result = true;
-
   for _ in range(1u, 100u) {
-    for g in gens.mut_iter() {
+    for g in gens.iter_mut() {
       let v : T = (*g)();
 
       // Check result of each test case
-      result = result & property(v);
+      if !property(v.clone()) {
+        return Err(v);
+      }
     }
   }
 
-  return result;
+  return Ok(true);
 }
+
+#[macro_export]
+macro_rules! for_all (
+  ($property : expr, $generators : expr) => ({
+    let result = rustcheck::for_all($property, $generators);
+
+    if result.is_err() {
+      fail!(result.unwrap_err().to_string());
+    }
+
+    match result {
+      Err(test_case) => { fail!(test_case.to_string()); }
+      _ => {}
+    }
+  })
+)

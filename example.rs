@@ -1,8 +1,10 @@
 //! Example rustcheck usage
 
-extern crate rustcheck;
+#![feature(phase)]
 
-use rustcheck::{gen_int,for_all};
+#[phase(plugin, link)] extern crate rustcheck;
+
+use rustcheck::gen_int;
 
 // Property: All integers are even
 fn prop_even(x : int) -> bool {
@@ -33,6 +35,6 @@ fn main() {
   let mut y = Vec::new();
   y.push(b);
 
-	assert!(for_all(prop_even, x));
-	assert!(for_all(prop_even, y));
+	for_all!(prop_even, x);
+	for_all!(prop_even, y);
 }
