@@ -9,10 +9,10 @@ http://www.yellosoft.us/quickcheck
 ```
 $ make
 mkdir -p bin/
-rustc --crate-type=lib rustcheck.rs
-rustc -o bin/example example.rs -L .
+rustc --crate-type=lib rustcheck.rs -O -W missing-doc -W non-uppercase-statics -W unnecessary-qualification -W unnecessary-typecast -W unused-result
+rustc -o bin/example example.rs -L . -O -W missing-doc -W non-uppercase-statics -W unnecessary-qualification -W unnecessary-typecast -W unused-result
 bin/example
-task '<main>' failed at 'assertion failed: for_all(prop_even, x)', example.rs:36
+task '<main>' failed at '621423509815437667', example.rs:38
 make: [test] Error 101 (ignored)
 ```
 
@@ -22,7 +22,7 @@ FreeBSD
 
 # REQUIREMENTS
 
-* [rust](http://www.rust-lang.org/) 0.11
+* [rust](http://www.rust-lang.org/) 0.12
 
 ## Optional
 
