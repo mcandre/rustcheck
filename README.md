@@ -16,6 +16,8 @@ task '<main>' failed at '621423509815437667', example.rs:38
 make: [test] Error 101 (ignored)
 ```
 
+See [example.rs](https://github.com/mcandre/rustcheck/blob/master/example.rs) for more information.
+
 # LICENSE
 
 FreeBSD
@@ -32,18 +34,24 @@ FreeBSD
 
 Install Guard and aspelllint:
 
-    $ bundle
+```
+$ bundle
+```
 
 # DEVELOPMENT
 
 ## Spell Check
 
-    $ aspelllint
-    ...
+```
+$ aspelllint
+...
+```
 
 ## Local CI
 
 Start Guard in a shell, and it will automatically run unit tests when the source code changes:
 
-    $ guard
-    ...
+```
+$ guard
+...
+```
