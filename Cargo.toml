@@ -1,0 +1,7 @@
+[package]
+name = "rustcheck"
+version = "0.1.0"
+authors = ["Chad Sharp <crossroads1112@gmail.com>"]
+
+[dependencies]
+rand="0.3"
