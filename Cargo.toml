@@ -1,0 +1,10 @@
+[package]
+name = "rustcheck"
+version = "0.1.0"
+description = "A port of the QuickCheck framework to Rust"
+keywords = ["tests", "unit", "quickcheck"]
+license-file = "./LICENSE"
+authors = ["Chad Sharp <crossroads1112@gmail.com>", "Andrew Pennebaker <andrew.pennebaker@gmail.com>"]
+
+[dependencies]
+rand="0.3"
